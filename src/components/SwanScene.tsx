@@ -30,19 +30,31 @@ const SwanScene = () => {
               textShadow: "0 1px 2px hsla(0,0%,100%,0.25)",
             }}
           >
-            <div className="font-tajawal text-lg sm:text-xl">
+            <div
+              className="font-tajawal text-lg sm:text-xl"
+              style={{ color: "#817762" }}
+            >
               {t("invite_to")}
             </div>
 
-            <div className="font-tajawal text-lg sm:text-xl">
+            <div
+              className="font-tajawal text-lg sm:text-xl"
+              style={{ color: "#817762" }}
+            >
               {t("invite_join")}
             </div>
 
-            <div className="font-tajawal text-lg sm:text-xl">
+            <div
+              className="font-tajawal text-lg sm:text-xl"
+              style={{ color: "#817762" }}
+            >
               {t("invite_day")}
             </div>
 
-            <div className="font-tajawal text-lg sm:text-xl mt-4">
+            <div
+              className="font-tajawal text-lg sm:text-xl mt-4"
+              style={{ color: "#4F4B35" }}
+            >
               {t("invite_with_love")}
             </div>
 
@@ -53,18 +65,28 @@ const SwanScene = () => {
             </div>
             */}
 
-            <div className="flex flex-col items-center font-sarahhh1 text-4xl sm:text-5xl my-1">
+            <div
+              className="flex flex-col items-center font-sarahhh1 text-4xl sm:text-5xl my-1"
+              style={{ color: "#B49A62" }}
+            >
               <span>{t("mother_name1")}</span>
               <span>{t("mother_name2")}</span>
             </div>
 
-            <div className="font-tajawal text-lg sm:text-xl mt-3">
+            <div
+              className="font-tajawal text-lg sm:text-xl mt-3"
+              style={{ color: "#4F4B35" }}
+            >
               {t("invite_attend")}
             </div>
 
             <div className="w-full flex justify-center gap-16 font-tajawal text-lg sm:text-xl my-2">
-              <span>{t("invite_before_bride")}</span>
-              <span>{t("invite_before_bride_2")}</span>
+              <span style={{ color: "#817762" }}>
+                {t("invite_before_bride")}
+              </span>
+              <span style={{ color: "#817762" }}>
+                {t("invite_before_bride_2")}
+              </span>
             </div>
 
             <div
@@ -90,6 +112,7 @@ const SwanScene = () => {
             <div
               className="font-tajawal text-lg sm:text-xl mt-10 inline-flex items-center gap-1.5"
               dir="ltr"
+              style={{ color: "#817762" }}
             >
               <svg
                 width="20"
