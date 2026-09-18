@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Check, X, Send, Heart } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import Reveal from "./Reveal";
 import { useLang } from "@/i18n/LanguageContext";
 
-const HOST_WHATSAPP = "966554129943";
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSd0A-YK2YIPPimkHZxF3HNrm5k7Ol61ajfYo_kOsFeTZxv26A/formResponse";
 
 type State =
   | { kind: "form" }
@@ -20,121 +20,123 @@ const RSVP = () => {
   const [choice, setChoice] = useState<"attending" | "declined" | null>(null);
   const [state, setState] = useState<State>({ kind: "form" });
 
-  // ✔️ ألوان وردية فقط (نفس مربع الأطفال)
-  const PINK = "hsl(340 55% 60%)";
-  const PINK_BORDER = "hsl(340 50% 75% / 0.5)";
-  const PINK_BG = "hsla(345, 60%, 97%, 0.6)";
-  const TEXT = "hsl(340 45% 30%)";
+  const TEXT = "#4F4B35";
+  const GOLD = "#B49A62";
+  const BG = "rgba(255,252,246,.78)";
+  const BORDER = "rgba(79,75,53,.18)";
 
   const submit = async () => {
     if (!name.trim() || !choice) return;
 
     setState({ kind: "loading" });
 
-const deviceId = Date.now().toString();
+    const formData = new URLSearchParams();
 
-    const { error } = await supabase.from("rsvps").insert({
-      name: name.trim(),
-      status: choice,
-      device_id: deviceId,
-    });
+    formData.append("entry.1986421858", name.trim());
+    formData.append(
+      "entry.349309262",
+      choice === "attending"
+        ? "تاكيد الحضور"
+        : "الاعتذار عن الحضور"
+    );
 
-    if (error) {
-      setState({ kind: "error", msg: "حدث خطأ، حاول مرة أخرى" });
-      return;
-    }
+    try {
+      await fetch(FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formData.toString(),
+      });
 
-    if (choice === "attending") {
-      setState({ kind: "attending", name: name.trim() });
-      setTimeout(() => sendWhatsApp("attending", name.trim()), 3000);
-    } else {
-      setState({ kind: "declined", name: name.trim() });
-      setTimeout(() => sendWhatsApp("declined", name.trim()), 3000);
+      if (choice === "attending") {
+        setState({
+          kind: "attending",
+          name: name.trim(),
+        });
+      } else {
+        setState({
+          kind: "declined",
+          name: name.trim(),
+        });
+      }
+    } catch {
+      setState({
+        kind: "error",
+        msg: "حدث خطأ، حاول مرة أخرى",
+      });
     }
   };
 
-  const sendWhatsApp = (
-  status: "attending" | "declined",
-  guestName: string
-) => {
-  const text =
-    status === "attending"
-      ? `🌸 سأحضر بإذن الله\n${guestName}`
-      : `🌸 أعتذر عن الحضور\n${guestName}`;
-
-  const isMobile = /iPhone|Android/i.test(navigator.userAgent);
-
-  const url = isMobile
-    ? `whatsapp://send?phone=${HOST_WHATSAPP}&text=${encodeURIComponent(text)}`
-    : `https://wa.me/${HOST_WHATSAPP}?text=${encodeURIComponent(text)}`;
-
-  window.location.href = url;
-};
-
   // ===== ATTENDING =====
   if (state.kind === "attending") {
-  return (
-    <Reveal>
-      <div
-        className="mx-auto max-w-md rounded-2xl p-8 text-center backdrop-blur-md"
-        style={{
-          background: PINK_BG,
-          border: `2px solid ${PINK}`,
-          boxShadow: `0 0 40px ${PINK}55`,
-        }}
-      >
-        <Heart
-          className="mx-auto w-10 h-10 mb-3"
-          style={{ color: PINK, fill: PINK }}
-        />
+    return (
+      <Reveal>
+        <div
+          className="mx-auto max-w-md rounded-2xl p-8 text-center backdrop-blur-md"
+          style={{
+            background: BG,
+            border: `2px solid ${GOLD}`,
+            boxShadow: `0 0 40px rgba(180,154,98,.22)`,
+          }}
+        >
+          <Heart
+            className="mx-auto w-10 h-10 mb-3"
+            style={{ color: GOLD, fill: GOLD }}
+          />
 
-        <div className="text-2xl font-bold mb-4" style={{ color: TEXT }}>
-          {t("thanks_attending")}
+          <div
+            className="text-2xl font-bold mb-4"
+            style={{ color: TEXT }}
+          >
+            {t("thanks_attending")}
+          </div>
+
+          <div
+            className="text-base mb-6"
+            style={{ color: TEXT }}
+          >
+            {state.name}
+          </div>
         </div>
-
-        <div className="text-base mb-6" style={{ color: TEXT }}>
-          {state.name}
-        </div>
-
-        <p className="text-sm" style={{ color: TEXT }}>
-          {t("redirect_wa")}
-        </p>
-      </div>
-    </Reveal>
-  );
-}
+      </Reveal>
+    );
+  }
 
   // ===== DECLINED =====
   if (state.kind === "declined") {
-  return (
-    <Reveal>
-      <div
-        className="mx-auto max-w-md rounded-2xl p-8 text-center backdrop-blur-md"
-        style={{
-          background: PINK_BG,
-          border: `1.5px solid ${PINK_BORDER}`,
-        }}
-      >
-        <Heart
-          className="mx-auto w-10 h-10 mb-3"
-          style={{ color: PINK, fill: PINK }}
-        />
+    return (
+      <Reveal>
+        <div
+          className="mx-auto max-w-md rounded-2xl p-8 text-center backdrop-blur-md"
+          style={{
+            background: BG,
+            border: `1.5px solid ${BORDER}`,
+          }}
+        >
+          <Heart
+            className="mx-auto w-10 h-10 mb-3"
+            style={{ color: GOLD, fill: GOLD }}
+          />
 
-        <p className="text-xl leading-loose mb-3" style={{ color: TEXT }}>
-          {t("thanks_declined")}
-        </p>
+          <p
+            className="text-xl leading-loose mb-3"
+            style={{ color: TEXT }}
+          >
+            {t("thanks_declined")}
+          </p>
 
-        <div className="text-base mb-6" style={{ color: TEXT }}>
-          {state.name}
+          <div
+            className="text-base mb-6"
+            style={{ color: TEXT }}
+          >
+            {state.name}
+          </div>
         </div>
-
-        <p className="text-sm" style={{ color: TEXT }}>
-          {t("redirect_wa")}
-        </p>
-      </div>
-    </Reveal>
-  );
-}
+      </Reveal>
+    );
+  }
 
   // ===== FORM =====
   return (
@@ -142,11 +144,14 @@ const deviceId = Date.now().toString();
       <div
         className="mx-auto max-w-md rounded-2xl p-8 backdrop-blur-md"
         style={{
-          background: PINK_BG,
-          border: `1.5px solid ${PINK_BORDER}`,
+          background: BG,
+          border: `1.5px solid ${BORDER}`,
         }}
       >
-        <label className="block text-sm mb-2" style={{ color: TEXT }}>
+        <label
+          className="block text-sm mb-2"
+          style={{ color: TEXT }}
+        >
           {t("name_label")}
         </label>
 
@@ -156,8 +161,8 @@ const deviceId = Date.now().toString();
           placeholder={t("name_placeholder")}
           className="w-full px-4 py-3 rounded-xl text-right"
           style={{
-            background: "hsla(345, 60%, 98%, 0.8)",
-            border: `1.5px solid ${PINK_BORDER}`,
+            background: "rgba(255,252,246,.88)",
+            border: `1.5px solid ${BORDER}`,
             color: TEXT,
           }}
         />
@@ -168,12 +173,12 @@ const deviceId = Date.now().toString();
             className="py-3 rounded-xl text-sm flex items-center justify-center gap-2"
             style={{
               background:
-                choice === "attending" ? PINK : PINK_BG,
+                choice === "attending" ? GOLD : BG,
               color: TEXT,
-              border: `1.5px solid ${PINK_BORDER}`,
+              border: `1.5px solid ${BORDER}`,
               boxShadow:
                 choice === "attending"
-                  ? `0 0 14px ${PINK}55`
+                  ? "0 0 14px rgba(180,154,98,.35)"
                   : "none",
             }}
           >
@@ -186,12 +191,12 @@ const deviceId = Date.now().toString();
             className="py-3 rounded-xl text-sm flex items-center justify-center gap-2"
             style={{
               background:
-                choice === "declined" ? PINK : PINK_BG,
+                choice === "declined" ? GOLD : BG,
               color: TEXT,
-              border: `1.5px solid ${PINK_BORDER}`,
+              border: `1.5px solid ${BORDER}`,
               boxShadow:
                 choice === "declined"
-                  ? `0 0 14px ${PINK}55`
+                  ? "0 0 14px rgba(180,154,98,.35)"
                   : "none",
             }}
           >
@@ -202,21 +207,30 @@ const deviceId = Date.now().toString();
 
         <button
           onClick={submit}
-          disabled={!name.trim() || !choice || state.kind === "loading"}
+          disabled={
+            !name.trim() ||
+            !choice ||
+            state.kind === "loading"
+          }
           className="w-full mt-5 py-3 rounded-xl text-base flex items-center justify-center gap-2"
           style={{
-            background: PINK,
-            color: "#fff",
-            boxShadow: `0 4px 18px ${PINK}55`,
+            background: GOLD,
+            color: "#FFFDF8",
+            boxShadow: "0 4px 18px rgba(180,154,98,.35)",
             fontWeight: 700,
           }}
         >
           <Send className="w-4 h-4" />
-          {state.kind === "loading" ? t("sending") : t("send")}
+          {state.kind === "loading"
+            ? t("sending")
+            : t("send")}
         </button>
 
         {state.kind === "error" && (
-          <p className="text-sm text-center mt-3" style={{ color: "red" }}>
+          <p
+            className="text-sm text-center mt-3"
+            style={{ color: "#4F4B35" }}
+          >
             {state.msg}
           </p>
         )}
