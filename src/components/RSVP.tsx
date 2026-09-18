@@ -2,36 +2,51 @@ import { useState } from "react";
 import { Check, X, Send, Heart } from "lucide-react";
 import Reveal from "./Reveal";
 import { useLang } from "@/i18n/LanguageContext";
-
 const FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSd0A-YK2YIPPimkHZxF3HNrm5k7Ol61ajfYo_kOsFeTZxv26A/formResponse";
-
+const RSVP_STORAGE_KEY = "rsvp_submitted";
 type State =
   | { kind: "form" }
   | { kind: "loading" }
   | { kind: "attending"; name: string }
   | { kind: "declined"; name: string }
   | { kind: "error"; msg: string };
-
 const RSVP = () => {
   const { t } = useLang();
-
+  const savedRSVP = (() => {
+    try {
+      const saved = localStorage.getItem(RSVP_STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved) as {
+          status: "attending" | "declined";
+          name: string;
+        };
+      }
+    } catch {}
+    return null;
+  })();
   const [name, setName] = useState("");
-  const [choice, setChoice] = useState<"attending" | "declined" | null>(null);
-  const [state, setState] = useState<State>({ kind: "form" });
-
+  const [choice, setChoice] = useState<
+    "attending" | "declined" | null
+  >(savedRSVP?.status ?? null);
+  const [state, setState] = useState<State>(
+    savedRSVP
+      ? {
+          kind: savedRSVP.status,
+          name: savedRSVP.name,
+        }
+      : { kind: "form" }
+  );
   const TEXT = "#4F4B35";
   const GOLD = "#B49A62";
   const BG = "rgba(255,252,246,.78)";
   const BORDER = "rgba(79,75,53,.18)";
-
   const submit = async () => {
     if (!name.trim() || !choice) return;
-
+    // منع التسجيل مرة ثانية حتى لو ضغط إرسال بسرعة
+    if (localStorage.getItem(RSVP_STORAGE_KEY)) return;
     setState({ kind: "loading" });
-
     const formData = new URLSearchParams();
-
     formData.append("entry.1986421858", name.trim());
     formData.append(
       "entry.349309262",
@@ -39,7 +54,6 @@ const RSVP = () => {
         ? "تاكيد الحضور"
         : "الاعتذار عن الحضور"
     );
-
     try {
       await fetch(FORM_URL, {
         method: "POST",
@@ -49,16 +63,23 @@ const RSVP = () => {
         },
         body: formData.toString(),
       });
-
+      const guestName = name.trim();
+      localStorage.setItem(
+        RSVP_STORAGE_KEY,
+        JSON.stringify({
+          status: choice,
+          name: guestName,
+        })
+      );
       if (choice === "attending") {
         setState({
           kind: "attending",
-          name: name.trim(),
+          name: guestName,
         });
       } else {
         setState({
           kind: "declined",
-          name: name.trim(),
+          name: guestName,
         });
       }
     } catch {
@@ -68,7 +89,6 @@ const RSVP = () => {
       });
     }
   };
-
   // ===== ATTENDING =====
   if (state.kind === "attending") {
     return (
@@ -85,14 +105,12 @@ const RSVP = () => {
             className="mx-auto w-10 h-10 mb-3"
             style={{ color: GOLD, fill: GOLD }}
           />
-
           <div
             className="text-2xl font-bold mb-4"
             style={{ color: TEXT }}
           >
             {t("thanks_attending")}
           </div>
-
           <div
             className="text-base mb-6"
             style={{ color: TEXT }}
@@ -103,7 +121,6 @@ const RSVP = () => {
       </Reveal>
     );
   }
-
   // ===== DECLINED =====
   if (state.kind === "declined") {
     return (
@@ -119,14 +136,12 @@ const RSVP = () => {
             className="mx-auto w-10 h-10 mb-3"
             style={{ color: GOLD, fill: GOLD }}
           />
-
           <p
             className="text-xl leading-loose mb-3"
             style={{ color: TEXT }}
           >
             {t("thanks_declined")}
           </p>
-
           <div
             className="text-base mb-6"
             style={{ color: TEXT }}
@@ -137,7 +152,6 @@ const RSVP = () => {
       </Reveal>
     );
   }
-
   // ===== FORM =====
   return (
     <Reveal>
@@ -154,7 +168,6 @@ const RSVP = () => {
         >
           {t("name_label")}
         </label>
-
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -166,7 +179,6 @@ const RSVP = () => {
             color: TEXT,
           }}
         />
-
         <div className="grid grid-cols-2 gap-3 mt-5">
           <button
             onClick={() => setChoice("attending")}
@@ -185,7 +197,6 @@ const RSVP = () => {
             <Check className="w-4 h-4" />
             {t("confirm")}
           </button>
-
           <button
             onClick={() => setChoice("declined")}
             className="py-3 rounded-xl text-sm flex items-center justify-center gap-2"
@@ -204,7 +215,6 @@ const RSVP = () => {
             {t("decline")}
           </button>
         </div>
-
         <button
           onClick={submit}
           disabled={
@@ -225,11 +235,10 @@ const RSVP = () => {
             ? t("sending")
             : t("send")}
         </button>
-
         {state.kind === "error" && (
           <p
             className="text-sm text-center mt-3"
-            style={{ color: "#4F4B35" }}
+            style={{ color: TEXT }}
           >
             {state.msg}
           </p>
@@ -238,5 +247,4 @@ const RSVP = () => {
     </Reveal>
   );
 };
-
 export default RSVP;
