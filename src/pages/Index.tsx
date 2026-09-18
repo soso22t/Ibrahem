@@ -177,7 +177,7 @@ const Index = () => {
             </div>
           </section>
 
-{/* <RSVP /> */}
+<RSVP /> 
 
           {/* ✔️ السهمين (إضافة فقط) */}
           <div className={`scroll-indicator ${hideScroll ? "hide" : ""}`}>
