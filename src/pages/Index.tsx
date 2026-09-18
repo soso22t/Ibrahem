@@ -116,7 +116,7 @@ const Index = () => {
               >
                 <iframe
                   title="Venue"
-                  src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
+                  src="https://www.google.com/maps?q=قاعة+قصر+المشاعر+مكة&output=embed"
                   width="100%"
                   height="320"
                   loading="lazy"
