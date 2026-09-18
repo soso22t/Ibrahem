@@ -20,15 +20,14 @@ const SwanScene = () => {
           className="absolute inset-0 flex items-center justify-center px-5 py-6"
         >
           <div
-            className="flex flex-col items-center text-center px-5 py-6 rounded-2xl w-[98%] sm:w-[92%] gap-4"
+            className="flex flex-col items-center text-center px-5 py-6 rounded-2xl w-[98%] sm:w-[92%] gap-3"
             style={{
               background:
                 "radial-gradient(ellipse at center, hsla(0,0%,0%,0.18) 0%, hsla(0,0%,0%,0.08) 200%, hsla(0,0%,0%,0) 100%)",
               backdropFilter: "blur(1.5px)",
               WebkitBackdropFilter: "blur(1.5px)",
               color: "#4F4B35",
-              textShadow:
-                "0 1px 2px hsla(255,255,255,0.25)",
+              textShadow: "0 1px 2px hsla(0,0%,100%,0.25)",
             }}
           >
             <div className="font-tajawal text-lg sm:text-xl">
@@ -57,6 +56,35 @@ const SwanScene = () => {
             <div className="flex flex-col items-center font-sarahhh1 text-4xl sm:text-5xl my-1">
               <span>{t("mother_name1")}</span>
               <span>{t("mother_name2")}</span>
+            </div>
+
+            <div className="font-tajawal text-lg sm:text-xl mt-3">
+              {t("invite_attend")}
+            </div>
+
+            <div className="w-full flex justify-center gap-16 font-tajawal text-lg sm:text-xl my-2">
+              <span>{t("invite_before_bride")}</span>
+              <span>{t("invite_before_bride_2")}</span>
+            </div>
+
+            <div
+              className={`${
+                lang === "ar" ? "font-nasta" : "font-display italic"
+              } text-5xl sm:text-6xl my-4`}
+              style={{ color: "#4F4B35" }}
+            >
+              {t("bride_name")}
+              <span
+                style={{
+                  fontSize: "0.35em",
+                  margin: "0 8px",
+                  verticalAlign: "middle",
+                  color: "#B49A62",
+                }}
+              >
+                ❤︎
+              </span>
+              {t("groom_name")}
             </div>
 
             <div
