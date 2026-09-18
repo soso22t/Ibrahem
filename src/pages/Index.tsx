@@ -14,10 +14,9 @@ import bgFloral from "@/assets/0CB8D1AA-F233-4862-B1EB-588914C269D6.png";
 
 const Index = () => {
   const [opened, setOpened] = useState(false);
-  const [hideScroll, setHideScroll] = useState(false); // ✔️ إضافة فقط
+  const [hideScroll, setHideScroll] = useState(false);
   const { t, lang } = useLang();
 
-  // ✔️ إضافة فقط (بدون لمس أي شيء)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -65,7 +64,10 @@ const Index = () => {
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4F4B35" }}>
+              <h2
+                className="text-center font-tajawal text-3xl mb-10"
+                style={{ color: "#4F4B35" }}
+              >
                 {t("countdown_title")}
               </h2>
             </Reveal>
@@ -76,17 +78,29 @@ const Index = () => {
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-8" style={{ color: "#4F4B35" }}>
+              <h2
+                className="text-center font-tajawal text-3xl mb-8"
+                style={{ color: "#4F4B35" }}
+              >
                 {t("venue_title")}
               </h2>
             </Reveal>
             <Reveal delay={100}>
               <div className="text-center mb-6">
-                <MapPin className="mx-auto w-10 h-10 mb-3" style={{ color: "#B49A62" }} />
-                <div className="font-tajawal text-2xl" style={{ color: "#4F4B35" }}>
+                <MapPin
+                  className="mx-auto w-10 h-10 mb-3"
+                  style={{ color: "#B49A62" }}
+                />
+                <div
+                  className="font-tajawal text-2xl"
+                  style={{ color: "#4F4B35" }}
+                >
                   {t("venue_name")}
                 </div>
-                <div className="font-tajawal text-lg mt-1" style={{ color: "#817762" }}>
+                <div
+                  className="font-tajawal text-lg mt-1"
+                  style={{ color: "#817762" }}
+                >
                   {t("venue_city")}
                 </div>
               </div>
@@ -114,7 +128,10 @@ const Index = () => {
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-6" style={{ color: "#4F4B35" }}>
+              <h2
+                className="text-center font-tajawal text-3xl mb-6"
+                style={{ color: "#4F4B35" }}
+              >
                 {t("program_title")}
               </h2>
             </Reveal>
@@ -123,14 +140,19 @@ const Index = () => {
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4F4B35" }}>
+              <h2
+                className="text-center font-tajawal text-3xl mb-10"
+                style={{ color: "#4F4B35" }}
+              >
                 {t("details_title")}
               </h2>
             </Reveal>
 
             <div className="relative max-w-xl mx-auto">
               <div
-                className={`absolute top-6 bottom-6 ${lang === "ar" ? "right-6" : "left-6"} w-px`}
+                className={`absolute top-6 bottom-6 ${
+                  lang === "ar" ? "right-6" : "left-6"
+                } w-px`}
                 style={{ background: "rgba(79,75,53,.18)" }}
               />
 
@@ -141,34 +163,48 @@ const Index = () => {
                   { icon: Ban, text: t("no_maghatir") },
                 ].map((d, i) => (
                   <Reveal key={i} delay={i * 120}>
-                    <div className={`relative ${lang === "ar" ? "pr-16" : "pl-16"}`}>
+                    <div
+                      className={`relative ${
+                        lang === "ar" ? "pr-16" : "pl-16"
+                      }`}
+                    >
                       <div
-                        className={`absolute ${lang === "ar" ? "right-0" : "left-0"} top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10`}
+                        className={`absolute ${
+                          lang === "ar" ? "right-0" : "left-0"
+                        } top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10`}
                         style={{
                           background: "rgba(255,252,246,.88)",
                           border: "2px solid #B49A62",
                           boxShadow: "0 6px 18px rgba(79,75,53,.12)",
                         }}
                       >
-                        <span className="w-2 h-2 rounded-full" style={{ background: "#B49A62" }} />
+                        <span
+                          className="w-2 h-2 rounded-full"
+                          style={{ background: "#B49A62" }}
+                        />
                       </div>
 
                       <div
-                        className="rounded-xl px-6 py-5 backdrop-blur-md flex items-center justify-between gap-4"
+                        className="rounded-xl px-6 py-5 flex items-center justify-between gap-4"
                         style={{
-                          background: "rgba(255,252,246,.78)",
+                          background: "transparent",
                           border: "1px solid rgba(79,75,53,.18)",
                         }}
                       >
                         <span
                           className={`font-tajawal text-lg flex-1 ${
-                            lang === "ar" ? "text-right" : "text-left"
+                            lang === "ar"
+                              ? "text-right"
+                              : "text-left"
                           }`}
                           style={{ color: "#4F4B35" }}
                         >
                           {d.text}
                         </span>
-                        <d.icon className="w-7 h-7 shrink-0" style={{ color: "#B49A62" }} />
+                        <d.icon
+                          className="w-7 h-7 shrink-0"
+                          style={{ color: "#B49A62" }}
+                        />
                       </div>
                     </div>
                   </Reveal>
@@ -177,9 +213,8 @@ const Index = () => {
             </div>
           </section>
 
-<RSVP /> 
+          <RSVP />
 
-          {/* ✔️ السهمين (إضافة فقط) */}
           <div className={`scroll-indicator ${hideScroll ? "hide" : ""}`}>
             <div className="scroll-text">اسحب للأسفل</div>
             <span className="arrow">⌄</span>
@@ -187,7 +222,10 @@ const Index = () => {
 
           <footer className="px-4 py-12 text-center">
             <Reveal>
-              <div className="flex items-center justify-center gap-2" style={{ color: "#B49A62" }}>
+              <div
+                className="flex items-center justify-center gap-2"
+                style={{ color: "#B49A62" }}
+              >
                 <Heart className="w-4 h-4 fill-current" />
                 <span className="font-tajawal text-sm">
                   {t("made_by")}{" "}
