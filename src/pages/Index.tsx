@@ -10,7 +10,7 @@ import MusicToggle from "@/components/MusicToggle";
 import LanguageToggle from "@/components/LanguageToggle";
 import SwanScene from "@/components/SwanScene";
 import { useLang } from "@/i18n/LanguageContext";
-import bgFloral from "@/assets/002910BD-A850-413F-AC15-5497A5EDF706.png";
+import bgFloral from "@/assets/0CB8D1AA-F233-4862-B1EB-588914C269D6.png";
 
 const Index = () => {
   const [opened, setOpened] = useState(false);
