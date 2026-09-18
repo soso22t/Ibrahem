@@ -36,7 +36,7 @@ const Index = () => {
       className="relative min-h-screen overflow-x-hidden"
       dir={lang === "ar" ? "rtl" : "ltr"}
       style={{
-background: "rgba(250, 247, 244, 0.45)",
+        background: "rgba(250, 247, 244, 0.45)",
       }}
     >
       <div
@@ -48,7 +48,7 @@ background: "rgba(250, 247, 244, 0.45)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           opacity: 0.35,
-         mixBlendMode: "multiply",
+          mixBlendMode: "multiply",
         }}
       />
 
@@ -65,7 +65,7 @@ background: "rgba(250, 247, 244, 0.45)",
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4B2737" }}>
+              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4F4B35" }}>
                 {t("countdown_title")}
               </h2>
             </Reveal>
@@ -76,17 +76,17 @@ background: "rgba(250, 247, 244, 0.45)",
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-8" style={{ color: "#4B2737" }}>
+              <h2 className="text-center font-tajawal text-3xl mb-8" style={{ color: "#4F4B35" }}>
                 {t("venue_title")}
               </h2>
             </Reveal>
             <Reveal delay={100}>
               <div className="text-center mb-6">
-                <MapPin className="mx-auto w-10 h-10 mb-3" style={{ color: "#6E4658" }} />
-                <div className="font-tajawal text-2xl" style={{ color: "#4B2737" }}>
+                <MapPin className="mx-auto w-10 h-10 mb-3" style={{ color: "#B49A62" }} />
+                <div className="font-tajawal text-2xl" style={{ color: "#4F4B35" }}>
                   {t("venue_name")}
                 </div>
-                <div className="font-tajawal text-lg mt-1" style={{ color: "#8A6A77" }}>
+                <div className="font-tajawal text-lg mt-1" style={{ color: "#817762" }}>
                   {t("venue_city")}
                 </div>
               </div>
@@ -97,12 +97,12 @@ background: "rgba(250, 247, 244, 0.45)",
                 className="max-w-2xl mx-auto rounded-2xl overflow-hidden"
                 style={{
                   boxShadow: "var(--shadow-soft)",
-border: "1px solid rgba(75,39,55,.18)",
+                  border: "1px solid rgba(79,75,53,.18)",
                 }}
               >
                 <iframe
                   title="Venue"
-src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
+                  src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
                   width="100%"
                   height="320"
                   loading="lazy"
@@ -114,7 +114,7 @@ src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-6" style={{ color: "#4B2737" }}>
+              <h2 className="text-center font-tajawal text-3xl mb-6" style={{ color: "#4F4B35" }}>
                 {t("program_title")}
               </h2>
             </Reveal>
@@ -123,7 +123,7 @@ src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
 
           <section className="px-4 py-16">
             <Reveal>
-              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4B2737" }}>
+              <h2 className="text-center font-tajawal text-3xl mb-10" style={{ color: "#4F4B35" }}>
                 {t("details_title")}
               </h2>
             </Reveal>
@@ -131,44 +131,44 @@ src="https://www.google.com/maps?q=قاعة+ريفان+جدة&output=embed"
             <div className="relative max-w-xl mx-auto">
               <div
                 className={`absolute top-6 bottom-6 ${lang === "ar" ? "right-6" : "left-6"} w-px`}
-                style={{ background: "rgba(75,39,55,.18)" }}
+                style={{ background: "rgba(79,75,53,.18)" }}
               />
 
               <div className="space-y-6">
                 {[
-  { icon: Baby, text: t("no_kids") },
-  { icon: Camera, text: t("no_cameras") },
-  { icon: Ban, text: t("no_maghatir") },
-].map((d, i) => (
+                  { icon: Baby, text: t("no_kids") },
+                  { icon: Camera, text: t("no_cameras") },
+                  { icon: Ban, text: t("no_maghatir") },
+                ].map((d, i) => (
                   <Reveal key={i} delay={i * 120}>
                     <div className={`relative ${lang === "ar" ? "pr-16" : "pl-16"}`}>
                       <div
                         className={`absolute ${lang === "ar" ? "right-0" : "left-0"} top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10`}
                         style={{
-                          background: "rgba(255,255,255,.88)",
-border: "2px solid #6E4658",
-boxShadow: "0 6px 18px rgba(75,39,55,.12)",
+                          background: "rgba(255,252,246,.88)",
+                          border: "2px solid #B49A62",
+                          boxShadow: "0 6px 18px rgba(79,75,53,.12)",
                         }}
                       >
-                        <span className="w-2 h-2 rounded-full" style={{ background: "#6E4658" }} />
+                        <span className="w-2 h-2 rounded-full" style={{ background: "#B49A62" }} />
                       </div>
 
                       <div
                         className="rounded-xl px-6 py-5 backdrop-blur-md flex items-center justify-between gap-4"
                         style={{
-                          background: "rgba(255,255,255,.78)",
-                          border: "1px solid rgba(75,39,55,.18)",
+                          background: "rgba(255,252,246,.78)",
+                          border: "1px solid rgba(79,75,53,.18)",
                         }}
                       >
                         <span
                           className={`font-tajawal text-lg flex-1 ${
                             lang === "ar" ? "text-right" : "text-left"
                           }`}
-                         style={{ color: "#4B2737" }}
+                          style={{ color: "#4F4B35" }}
                         >
                           {d.text}
                         </span>
-                        <d.icon className="w-7 h-7 shrink-0" style={{ color: "#6E4658" }} />
+                        <d.icon className="w-7 h-7 shrink-0" style={{ color: "#B49A62" }} />
                       </div>
                     </div>
                   </Reveal>
@@ -181,13 +181,13 @@ boxShadow: "0 6px 18px rgba(75,39,55,.12)",
 
           {/* ✔️ السهمين (إضافة فقط) */}
           <div className={`scroll-indicator ${hideScroll ? "hide" : ""}`}>
-  <div className="scroll-text">اسحب للأسفل</div>
-  <span className="arrow">⌄</span>
-</div>
+            <div className="scroll-text">اسحب للأسفل</div>
+            <span className="arrow">⌄</span>
+          </div>
 
           <footer className="px-4 py-12 text-center">
             <Reveal>
-              <div className="flex items-center justify-center gap-2" style={{ color: "#6E4658" }}>
+              <div className="flex items-center justify-center gap-2" style={{ color: "#B49A62" }}>
                 <Heart className="w-4 h-4 fill-current" />
                 <span className="font-tajawal text-sm">
                   {t("made_by")}{" "}
@@ -196,7 +196,7 @@ boxShadow: "0 6px 18px rgba(75,39,55,.12)",
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline underline-offset-4"
-                    style={{ color: "#4B2737" }}
+                    style={{ color: "#4F4B35" }}
                   >
                     {t("store")}
                   </a>
