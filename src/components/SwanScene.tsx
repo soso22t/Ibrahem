@@ -10,7 +10,7 @@ const SwanScene = () => {
         style={{ maxWidth: 480, aspectRatio: "9 / 16" }}
       >
         <img
-  src="/3B7A8177-2B92-4DF5-B3F2-620C30916530.png"
+  src="/0CB8D1AA-F233-4862-B1EB-588914C269D6.png"
   alt=""
   className="absolute inset-0 w-full h-full object-cover select-none"
 />
