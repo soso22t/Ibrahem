@@ -61,13 +61,13 @@ const SwanScene = () => {
             </div>
             */}
 
-            {/* تم استخدام transform: translateY(-16px) لرفع النص إجبارياً للأعلى وإلغاء الفراغ العلوي للخط */}
+            {/* تم زيادة رفع النص للأعلى إلى -28px لضبط التوسيط */}
             <div
               className="flex flex-col items-center font-mosh text-4xl sm:text-5xl my-1"
               style={{
                 color: "#6F6043",
                 textShadow: "0 1px 2px rgba(255,252,246,.4)",
-                transform: "translateY(-16px)",
+                transform: "translateY(-28px)",
               }}
             >
               <span>{t("mother_name1")}</span>
