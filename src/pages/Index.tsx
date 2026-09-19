@@ -16,7 +16,7 @@ import introImage from "@/assets/photo-output.png";
 const Index = () => {
   const [opened, setOpened] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
-  const [introFadeOut, setIntroFadeOut] = useState(false);
+  const [introVisible, setIntroVisible] = useState(false);
   const [hideScroll, setHideScroll] = useState(false);
   const { t, lang } = useLang();
 
@@ -24,17 +24,22 @@ const Index = () => {
     if (!opened) return;
 
     setShowIntro(true);
-    setIntroFadeOut(false);
+    setIntroVisible(false);
+
+    const fadeInTimer = setTimeout(() => {
+      setIntroVisible(true);
+    }, 50);
 
     const fadeOutTimer = setTimeout(() => {
-      setIntroFadeOut(true);
-    }, 5800);
+      setIntroVisible(false);
+    }, 6050);
 
     const hideTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 6600);
+    }, 7050);
 
     return () => {
+      clearTimeout(fadeInTimer);
       clearTimeout(fadeOutTimer);
       clearTimeout(hideTimer);
     };
@@ -95,10 +100,8 @@ const Index = () => {
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover select-none"
                   style={{
-                    opacity: introFadeOut ? 0 : 1,
-                    transition: introFadeOut
-                      ? "opacity 0.8s ease-in-out"
-                      : "opacity 0.8s ease-in-out",
+                    opacity: introVisible ? 1 : 0,
+                    transition: "opacity 1s ease-in-out",
                   }}
                 />
               </div>
