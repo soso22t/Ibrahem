@@ -62,7 +62,7 @@ const SwanScene = () => {
             */}
 
             <div
-              className="flex flex-col items-center font-sarahhh1 text-4xl sm:text-5xl my-1"
+              className="flex flex-col items-center font-mosh text-4xl sm:text-5xl my-1"
               style={{
                 color: "#6F6043",
                 textShadow: "0 1px 2px rgba(255,252,246,.4)",
