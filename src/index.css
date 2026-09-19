@@ -9,7 +9,6 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
   font-family: 'Mosh';
   src: url('/src/assets/fonts/Mosh.ttf') format('truetype');
   font-weight: normal;
