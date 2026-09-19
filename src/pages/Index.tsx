@@ -11,11 +11,34 @@ import LanguageToggle from "@/components/LanguageToggle";
 import SwanScene from "@/components/SwanScene";
 import { useLang } from "@/i18n/LanguageContext";
 import bgFloral from "@/assets/0CB8D1AA-F233-4862-B1EB-588914C269D6.png";
+import introImage from "@/assets/photo-output.png";
 
 const Index = () => {
   const [opened, setOpened] = useState(false);
+  const [showIntro, setShowIntro] = useState(false);
+  const [introFadeOut, setIntroFadeOut] = useState(false);
   const [hideScroll, setHideScroll] = useState(false);
   const { t, lang } = useLang();
+
+  useEffect(() => {
+    if (!opened) return;
+
+    setShowIntro(true);
+    setIntroFadeOut(false);
+
+    const fadeOutTimer = setTimeout(() => {
+      setIntroFadeOut(true);
+    }, 5800);
+
+    const hideTimer = setTimeout(() => {
+      setShowIntro(false);
+    }, 6600);
+
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [opened]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +82,29 @@ const Index = () => {
       {opened && (
         <main className="relative z-10">
           <section className="w-full p-0 m-0">
-            <SwanScene />
+            {showIntro ? (
+              <div
+                className="relative w-full mx-auto overflow-hidden"
+                style={{
+                  maxWidth: 480,
+                  aspectRatio: "9 / 16",
+                }}
+              >
+                <img
+                  src={introImage}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover select-none"
+                  style={{
+                    opacity: introFadeOut ? 0 : 1,
+                    transition: introFadeOut
+                      ? "opacity 0.8s ease-in-out"
+                      : "opacity 0.8s ease-in-out",
+                  }}
+                />
+              </div>
+            ) : (
+              <SwanScene />
+            )}
           </section>
 
           <section className="px-4 py-16">
