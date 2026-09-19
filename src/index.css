@@ -9,6 +9,7 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
   font-family: 'Mosh';
   src: url('/src/assets/fonts/Mosh.ttf') format('truetype');
   font-weight: normal;
@@ -95,15 +96,19 @@
   .font-tajawal {
     font-family: 'Tajawal', sans-serif;
   }
+
   .font-mosh {
     font-family: 'Mosh';
   }
+
   .font-arabic {
     font-family: 'Tajawal', sans-serif;
   }
+
   .font-nasta {
     font-family: 'IranNastaliq', 'Tajawal', serif;
   }
+
   .font-display {
     font-family: 'Playfair Display', serif;
   }
@@ -111,6 +116,7 @@
   .animate-float-slow {
     animation: float-slow 4s ease-in-out infinite;
   }
+
   @keyframes float-slow {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -131,6 +137,7 @@
     animation: water-shimmer 14s linear infinite;
     mix-blend-mode: screen;
   }
+
   @keyframes water-shimmer {
     0%   { background-position: 0% 50%; }
     100% { background-position: 200% 50%; }
@@ -147,9 +154,11 @@
     animation: ripple 6s ease-out infinite;
     pointer-events: none;
   }
+
   .swan-ripple-2 {
     animation-delay: 3s;
   }
+
   @keyframes ripple {
     0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
     20%  { opacity: 0.85; }
@@ -166,13 +175,16 @@
     animation: drift 13s ease-in-out infinite;
     mix-blend-mode: screen;
   }
+
   .swan-drift-2 {
     animation: drift-r 14s ease-in-out infinite;
   }
+
   @keyframes drift {
     0%, 100% { transform: translate(-50%, -50%) translateX(0) translateY(0); }
     50%      { transform: translate(-50%, -50%) translateX(6px) translateY(-2px); }
   }
+
   @keyframes drift-r {
     0%, 100% { transform: translate(-50%, -50%) translateX(0) translateY(0); }
     50%      { transform: translate(-50%, -50%) translateX(-6px) translateY(-2px); }
@@ -187,25 +199,28 @@
     animation: sparkle-pulse 4s ease-in-out infinite;
     mix-blend-mode: screen;
   }
+
   @keyframes sparkle-pulse {
     0%, 100% { opacity: 0.55; }
     50%      { opacity: 1; }
   }
+
   .animate-fade-up {
     opacity: 0;
-  animation: fadeUp 0.8s ease-out 1.2s forwards;
+    animation: fadeUp 0.8s ease-out 1.2s forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
-@keyframes fadeUp {
-  from {
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-}
 .scroll-indicator {
   position: fixed;
   bottom: 18px;
