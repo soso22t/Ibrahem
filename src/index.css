@@ -9,7 +9,13 @@
   font-style: normal;
   font-display: swap;
 }
-
+@font-face {
+  font-family: 'Mosh';
+  src: url('/src/assets/fonts/Mosh.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: 'IranNastaliq';
   src: url('/src/assets/fonts/IranNastaliq.ttf') format('truetype');
@@ -90,6 +96,10 @@
   .font-tajawal {
     font-family: 'Tajawal', sans-serif;
   }
+  .font-mosh {
+    font-family: 'Mosh';
+  }
+}
   .font-arabic {
     font-family: 'Tajawal', sans-serif;
   }
